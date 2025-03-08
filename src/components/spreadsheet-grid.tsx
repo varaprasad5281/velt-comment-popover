@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import {
@@ -28,23 +28,21 @@ export default function SpreadsheetGrid() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="absolute top-10 right-4">
+    <div className="overflow-hidden p-4 w-full">
+      <div className="absolute top-6 right-4">
         <VeltSidebarButton />
         <VeltCommentsSidebar />
       </div>
-
       <VeltComments popoverMode={true} popoverTriangleComponent={true} />
-
-      <div className="overflow-hidden rounded-lg border border-gray-700 bg-gray-800 shadow-xl">
-        <div className="w-full max-w-7xl overflow-auto">
-          <table className="w-full border-collapse table-fixed">
+      <div className="overflow-hidden rounded-lg border border-gray-700 bg-gray-800 shadow-xl w-full">
+        <div className="w-full overflow-auto">
+          <table className="w-full border-collapse">
             <thead>
               <tr>
                 {columns.map((column) => (
                   <th
                     key={column}
-                    className="w-1/7 h-16 border border-gray-700 bg-gray-800 p-3 text-center font-medium text-gray-200"
+                    className="border border-gray-700 bg-gray-800 p-3 text-center font-medium text-gray-200"
                   >
                     {column}
                   </th>
@@ -63,7 +61,7 @@ export default function SpreadsheetGrid() {
                       <td
                         key={cellId}
                         onClick={() => handleCellClick(cellId)}
-                        className={`w-1/7 h-16 border border-gray-700 bg-gray-900 p-3 text-gray-300 transition-colors group text-center relative $ {
+                        className={`border border-gray-700 bg-gray-900 p-3 text-gray-300 transition-colors group text-center relative ${
                           isSelected ? "bg-gray-700" : ""
                         }`}
                         id={cellId}
@@ -76,7 +74,7 @@ export default function SpreadsheetGrid() {
                           className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity"
                           onClick={(e) => handleCommentClick(cellId, e)}
                         >
-                          <VeltCommentTool className="min-w-2xl z-10" targetElementId={cellId}/>
+                          <VeltCommentTool className="min-w-2xl z-10" targetElementId={cellId} />
                         </div>
 
                         {isCommentActive && (

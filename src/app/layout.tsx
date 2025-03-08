@@ -5,7 +5,7 @@ import { Geist, Azeret_Mono as Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { VeltProvider } from "@veltdev/react";
 import YourAuthComponent from "@/components/YourAuthComponent";
-
+import { Sidebar } from "lucide-react"
 const geist = Geist({ subsets: ["latin"] });
 const geistMono = Geist_Mono({ subsets: ["latin"] });
 
