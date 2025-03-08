@@ -1,7 +1,13 @@
 "use client";
 
 import { Home, FileText, Settings, LogOut, Menu } from "lucide-react";
-import { useEffect, memo } from "react";
+import { useEffect, memo, JSX } from "react";
+
+// Define props interface
+interface SidebarProps {
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const sidebarItems = [
   { id: "home", icon: <Home size={24} />, label: "Home" },
@@ -9,7 +15,7 @@ const sidebarItems = [
   { id: "settings", icon: <Settings size={24} />, label: "Settings" },
 ];
 
-export default function Sidebar({ isCollapsed, setIsCollapsed }) {
+export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
   useEffect(() => {
     const handleResize = () => {
       setIsCollapsed(window.innerWidth < 768); // Auto-collapse on mobile but keep icon size
@@ -51,7 +57,13 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
 }
 
 // Sidebar Item Component (Memoized)
-const SidebarItem = memo(({ icon, label, isCollapsed }) => (
+interface SidebarItemProps {
+  icon: JSX.Element;
+  label: string;
+  isCollapsed: boolean;
+}
+
+const SidebarItem = memo(({ icon, label, isCollapsed }: SidebarItemProps) => (
   <li className={`flex items-center p-3 cursor-pointer rounded-lg hover:bg-gray-700 transition-all ${isCollapsed ? "justify-center" : ""}`}>
     {icon}
     {!isCollapsed && <span className="ml-3">{label}</span>}
