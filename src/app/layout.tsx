@@ -11,8 +11,7 @@ const geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const apiKey = process.env.NEXT_PUBLIC_VELT_API_KEY;
-  const documentId = "spreadsheet-doc-123"; // ✅ Ensure this is unique for each document
-
+  const documentId = "spreadsheet-doc-123"; 
   if (!apiKey) {
     console.error("❌ Velt API key is missing! Check .env.local");
   }
@@ -21,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={geist.className}>
       <body>
         <VeltProvider apiKey={apiKey || ""} documentId={documentId}>
-          <YourAuthComponent /> {/* ✅ Handles user authentication */}
+          <YourAuthComponent />
           {children}
         </VeltProvider>
       </body>

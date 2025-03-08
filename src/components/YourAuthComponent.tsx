@@ -1,6 +1,7 @@
 "use client";
 
 import { useIdentify } from "@veltdev/react";
+import { userInfo } from "os";
 
 export default function YourAuthComponent() {
   const userService = () => ({
@@ -20,7 +21,7 @@ export default function YourAuthComponent() {
   const user = {
     userId: uid,
     organizationId,
-    name: displayName,
+    name: userInfo,
     email,
     photoUrl: photoURL,
     color,
