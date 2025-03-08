@@ -1,7 +1,7 @@
 "use client";
 
 import { Home, FileText, Settings, LogOut, Menu } from "lucide-react";
-import { useEffect, memo, JSX } from "react";
+import { useEffect, memo, useState, JSX } from "react";
 
 // Define props interface
 interface SidebarProps {
@@ -16,9 +16,11 @@ const sidebarItems = [
 ];
 
 export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
+  const [activeTab, setActiveTab] = useState("sheets"); // Default active tab: Sheets
+
   useEffect(() => {
     const handleResize = () => {
-      setIsCollapsed(window.innerWidth < 768); // Auto-collapse on mobile but keep icon size
+      setIsCollapsed(window.innerWidth < 768);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -43,7 +45,14 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
       <nav className="flex-1">
         <ul className="space-y-2 p-4">
           {sidebarItems.map(({ id, icon, label }) => (
-            <SidebarItem key={id} icon={icon} label={label} isCollapsed={isCollapsed} />
+            <SidebarItem
+              key={id}
+              icon={icon}
+              label={label}
+              isCollapsed={isCollapsed}
+              isActive={id === activeTab}
+              onClick={() => setActiveTab(id)}
+            />
           ))}
         </ul>
       </nav>
@@ -61,10 +70,21 @@ interface SidebarItemProps {
   icon: JSX.Element;
   label: string;
   isCollapsed: boolean;
+  isActive?: boolean;
+  onClick?: () => void;
 }
 
-const SidebarItem = memo(({ icon, label, isCollapsed }: SidebarItemProps) => (
-  <li className={`flex items-center p-3 cursor-pointer rounded-lg hover:bg-gray-700 transition-all ${isCollapsed ? "justify-center" : ""}`}>
+const SidebarItem = memo(({ icon, label, isCollapsed, isActive, onClick }: SidebarItemProps) => (
+  <li
+    onClick={onClick}
+    className={`flex items-center p-3 cursor-pointer rounded-lg transition-all ${
+      isCollapsed ? "justify-center" : ""
+    } ${
+      isActive
+        ? "bg-gray-700 text-white" // **Dull gray color for active tab**
+        : "hover:bg-gray-600"
+    }`}
+  >
     {icon}
     {!isCollapsed && <span className="ml-3">{label}</span>}
   </li>
