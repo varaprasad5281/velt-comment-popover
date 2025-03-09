@@ -14,6 +14,7 @@ import { players } from "./constants";
 export default function SpreadsheetGrid() {
   const columns = ["Player Name", "Age", "Place", "IPL Team", "T20 Avg", "Test Avg", "ODI Avg"];
   const rows = players;
+  const name:string="Prasad"
 
   const [selectedCell, setSelectedCell] = useState<string | null>(null);
   const [activeCommentCell, setActiveCommentCell] = useState<string | null>(null);
@@ -33,7 +34,7 @@ export default function SpreadsheetGrid() {
         <VeltSidebarButton />
         <VeltCommentsSidebar />
       </div>
-      <VeltComments popoverMode={true} popoverTriangleComponent={true} />
+      <VeltComments popoverMode={true} popoverTriangleComponent={true} shortUserName={false}/>
       <div className="overflow-hidden rounded-lg border border-gray-700 bg-gray-800 shadow-xl w-full">
         <div className="w-full overflow-auto">
           <table className="w-full border-collapse">
@@ -74,7 +75,7 @@ export default function SpreadsheetGrid() {
                           className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 hover:opacity-100 transition-opacity"
                           onClick={(e) => handleCommentClick(cellId, e)}
                         >
-                          <VeltCommentTool className="min-w-2xl z-10" targetElementId={cellId} />
+                          <VeltCommentTool className="min-w-2xl z-10" targetElementId={cellId}/>
                         </div>
 
                         {isCommentActive && (
